@@ -8,6 +8,14 @@ import QuestionView from "./components/QuestionView";
 import AddQuestion from "./pages/questionBank/AddQuestion";
 import QuestionOverview from "./pages/Qadmin/QuestionOverview";
 import UpdateQuestion from "./pages/questionBank/UpdateQuestion";
+import AddCompany from "./pages/Company/AddCompany";
+import UpdateCompany from "./pages/Company/UpdateCompany"
+import Companies from "./pages/Company/Companies";
+import GetSingleCompany from "./pages/Company/GetSingleCompany";
+import GetSingleRoadmap from "./pages/RoadMap/GetSingleRoadMap"
+import GetSingleAssignment from "./pages/assignment/GetSingleAssignment";
+import Login from "./pages/Login";
+import Registration from "./pages/Registration";
 import Home from "./pages/Home/Home";
 import AddQuiz from "./pages/Quiz/AddQuiz";
 import ViewQuizList from "./pages/Quiz/ViewQuizList";
@@ -30,6 +38,14 @@ function App() {
                     <Route path="/" element={<Landing />} />
                     <Route path="/addQuestion" element={<AddQuestion/>} />
                     <Route path="/qadmin/updateQuestion/:questionId" element={<UpdateQuestion/>} />
+                    <Route path="/company/addCompany" element={<AddCompany/>} />
+                    <Route path="/company/update/:id" element={<UpdateCompany />} />
+                    <Route path="/company/getOneCompany/:id" element={<GetSingleCompany/>}/>
+                    <Route path="/company/" element={<Companies/>}/> 
+                    <Route path="/company/roadMap/:id" element={<GetSingleRoadmap/>} />
+                    <Route path="/assignment/getOne/:id/:id2" element={<GetSingleAssignment/>}/>
+                    <Route path="/login" element={<Login/>}/>
+                    <Route path="/register" element={<Registration/>}/>
                     <Route path="/addQuiz" element={<AddQuiz/>} />
                     <Route path="/quizlist" element={<ViewQuizList/>} />
                     <Route path="/quiz/:quizSetId" element={<QuizOverview/>} />
