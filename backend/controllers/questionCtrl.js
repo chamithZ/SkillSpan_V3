@@ -1,5 +1,6 @@
 
 const Question = require("../models/questionModel");
+const QuizSet = require("../models/quizSetModel");
 
   const createQuestion = async (req, res) => {
    
@@ -87,6 +88,52 @@ const getAllQuestion = async (req, res, next) => {
       throw error;
     }
   };
+
+ 
+
+// Controller to get all quiz sets
+exports.getAllQuizSets = async (req, res) => {
+  try {
+    const quizSets = await QuizSet.find();
+    res.status(200).json({ quizSets });
+  } catch (error) {
+    console.error('Error getting all quiz sets:', error);
+    res.status(500).json({ error: 'An error occurred while fetching quiz sets.' });
+  }
+};
+
+// Controller to get a specific quiz set by ID
+exports.getQuizSetById = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const quizSet = await QuizSet.findById(id).populate('quizzes'); // Populate the quizzes array with actual quiz documents
+    if (!quizSet) {
+      return res.status(404).json({ error: 'Quiz set not found' });
+    }
+
+    res.status(200).json({ quizSet });
+  } catch (error) {
+    console.error('Error getting quiz set by ID:', error);
+    res.status(500).json({ error: 'An error occurred while fetching the quiz set.' });
+  }
+};
+  
+exports.getQuizById = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const quizSet = await QuizSet.findById(id).populate('quizzes'); // Populate the quizzes array with actual quiz documents
+    if (!quizSet) {
+      return res.status(404).json({ error: 'Quiz set not found' });
+    }
+
+    res.status(200).json({ quizSet });
+  } catch (error) {
+    console.error('Error getting quiz set by ID:', error);
+    res.status(500).json({ error: 'An error occurred while fetching the quiz set.' });
+  }
+};
   
 
 

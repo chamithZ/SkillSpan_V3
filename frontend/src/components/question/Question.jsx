@@ -36,7 +36,7 @@ function QuestionList() {
       <div className="flex space-x-4 mb-4 flex-wrap ">
         {/* Language Filter */}
         <select
-          className="border p-2  border-blue-400 rounded-md text-darkblue bg-lightblue" // Change dropdown selection colors
+          className="border p-2  border-blue-400 rounded-md text-darkblue bg-lightblue" 
           onChange={(e) => setFilter(e.target.value)}
           value={filter}
         >
