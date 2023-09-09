@@ -1,11 +1,17 @@
+const express = require("express");
+const axios = require("axios");
+const dotenv = require("dotenv");
+const { openai } = require("./config_openai");
 
-
-const express = require('express');
-const axios = require('axios');
-const dotenv = require('dotenv');
-const { openai } = require('../server.js');
-dotenv.config();
 const router = express.Router();
+
+dotenv.config();
+
+// Error handling middleware
+const handleOpenAIError = (error, res) => {
+    console.error("OpenAI API Error:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+};
 
 router.post("/text", async (req, res) => {
     try {
@@ -21,9 +27,12 @@ router.post("/text", async (req, res) => {
             presence_penalty: 0,
         });
 
+        const botResponse = response.data.choices[0].text;
+
+        // Send the bot response to your chat engine
         await axios.post(
             `https://api.chatengine.io/chats/${activeChatId}/messages/`,
-            { text: response.data.choices[0].text },
+            { text: botResponse },
             {
                 headers: {
                     "Project-ID": process.env.PROJECT_ID,
@@ -33,10 +42,9 @@ router.post("/text", async (req, res) => {
             }
         );
 
-        res.status(200).json({ text: response.data.choices[0].text });
+        res.status(200).json({ text: botResponse });
     } catch (error) {
-        console.error("error", error);
-        res.status(500).json({ error: error.message });
+        handleOpenAIError(error, res);
     }
 });
 
@@ -54,9 +62,12 @@ router.post("/code", async (req, res) => {
             presence_penalty: 0,
         });
 
+        const botResponse = response.data.choices[0].text;
+
+        // Send the bot response to your chat engine
         await axios.post(
             `https://api.chatengine.io/chats/${activeChatId}/messages/`,
-            { text: response.data.choices[0].text },
+            { text: botResponse },
             {
                 headers: {
                     "Project-ID": process.env.PROJECT_ID,
@@ -66,10 +77,9 @@ router.post("/code", async (req, res) => {
             }
         );
 
-        res.status(200).json({ text: response.data.choices[0].text });
+        res.status(200).json({ text: botResponse });
     } catch (error) {
-        console.error("error", error.response.data.error);
-        res.status(500).json({ error: error.message });
+        handleOpenAIError(error, res);
     }
 });
 
@@ -87,11 +97,12 @@ router.post("/assist", async (req, res) => {
             presence_penalty: 0,
         });
 
-        res.status(200).json({ text: response.data.choices[0].text });
+        const botResponse = response.data.choices[0].text;
+
+        res.status(200).json({ text: botResponse });
     } catch (error) {
-        console.error("error", error);
-        res.status(500).json({ error: error.message });
+        handleOpenAIError(error, res);
     }
 });
 
-module.exports=router;
+module.exports = router;
