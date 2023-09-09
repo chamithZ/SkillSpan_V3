@@ -1,14 +1,23 @@
 const mongoose = require("mongoose");
 
-const MONGO_URL='mongodb+srv://skillSpanAdmin:16820@cluster0.dxw50go.mongodb.net/SkillSpanDB?retryWrites=true&w=majority';
 const connectDB = async () => {
   try {
-    const conn = await mongoose.connect(MONGO_URL);
+    if (!process.env.MONGO_URL) {
+      throw new Error("MONGO_URL environment variable is not defined.");
+    }
+
+    const conn = await mongoose.connect(process.env.MONGO_URL, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+
     console.log(`MongoDB connected : ${conn.connection.host} 😎`);
   } catch (error) {
-    console.log(error);
+    console.error("MongoDB connection error:", error.message);
     process.exit(1);
   }
 };
 
 module.exports = connectDB;
+
+

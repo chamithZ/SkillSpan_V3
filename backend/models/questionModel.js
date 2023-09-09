@@ -28,9 +28,6 @@ const QestionSchema=new mongoose.Schema({
     }, 
    
     
-    HotelImg:{
-        type:String}
-    , 
     isApproved:{ // for admin
         type: Boolean,
         default: true,
