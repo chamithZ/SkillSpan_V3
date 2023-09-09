@@ -115,7 +115,39 @@ function Header() {
             Intern Supporter 
           </Link>
           <Link
-            to="/blog"
+            to="/quizlist"
+            className="
+            hover:text-blue-700 hover:font-medium
+            capitalize
+            inline-block
+            text-lg
+            text-blue-700
+            relative
+            cursor-pointer
+            transition-all
+            duration-400
+            before:content-['']
+            before:absolute
+            before:-bottom-2
+            before:left-0
+            before:w-0
+            before:h-1.5
+            before:rounded-full
+            before:opacity-0
+            before:transition-all
+            before:duration-300
+            before:bg-gradient-to-r
+            before:from-blue-300
+            before:via-blue-400
+            before:to-blue-600
+            hover:before:w-full
+            hover:before:opacity-100
+    "
+          >
+            Quiz
+          </Link>
+          <Link
+            to="/chat"
             className="
             hover:text-blue-700 hover:font-medium
             capitalize
