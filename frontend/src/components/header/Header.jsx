@@ -18,7 +18,7 @@ function Header() {
         {/* Navigation Links */}
         <nav className="space-x-4">
           <Link
-            to="/"
+            to="/home"
             className="
             hover:text-blue-700 hover:font-medium
             capitalize

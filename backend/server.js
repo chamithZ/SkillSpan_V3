@@ -54,3 +54,4 @@ connectDB();
 
 
 app.use("/question",require("./routes/questionRoute")) 
+app.use("/quiz",require("./routes/quizRoute.js"))
