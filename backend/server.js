@@ -74,6 +74,7 @@ app.use(cors());
 /* ROUTES */
 app.use("/openai", openAiRoutes);
 app.use('/question', require('./routes/questionRoute'));
+app.use('/quiz', require('./routes/quizRoute'));
 
 
 
