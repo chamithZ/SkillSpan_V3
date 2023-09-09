@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Header from '../../components/header/Header';
 
 function Companies() {
   const [companies, setCompanies] = useState([]);
@@ -23,8 +24,10 @@ function Companies() {
       });
   }, []);
 
-  return (
+  return (<div>
+    <Header/>
     <div className="container mx-auto p-20">
+
     <div className="grid grid-cols-1 justify-between sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-20 ">
       {companies.map((company, index) => (
         <div
@@ -52,6 +55,7 @@ function Companies() {
         </div>
       ))}
     </div>
+  </div>
   </div>
   );
 }

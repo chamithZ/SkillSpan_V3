@@ -8,7 +8,9 @@ const userSchema = new mongoose.Schema({
   email : {type:String},
   contactNumber : {type:String},
   campus : {type:String},
-  age : {type:String}
+  age : {type:String},
+  Level : {type:String},
+  points : {type:String}
 });
 
 module.exports = mongoose.model('User', userSchema);

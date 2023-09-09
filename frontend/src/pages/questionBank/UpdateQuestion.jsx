@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 function UpdateQuestion() {
   const { questionId } = useParams();
@@ -55,14 +56,25 @@ function UpdateQuestion() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
-
+  
     if (questionId) {
       // Update the question if questionId is provided
       axios
         .put(`/question/update/${questionId}`, formData)
         .then((response) => {
           console.log('Question updated successfully:', response.data);
-          // Handle success (e.g., show a success message or redirect)
+          
+          // Display a SweetAlert notification for success
+          Swal.fire({
+            title: 'Success!',
+            text: 'Question has been updated successfully!',
+            icon: 'success',
+            confirmButtonText: 'OK',
+          }).then(() => {
+            // Redirect to the admin page (replace '/admin' with your desired URL)
+            window.location.href = '/admindashboard';
+          });
+  
           setLoading(false);
         })
         .catch((error) => {
@@ -71,19 +83,8 @@ function UpdateQuestion() {
           setLoading(false);
         });
     } else {
-      // Create a new question if no questionId is provided
-      axios
-        .post('/question/add', formData)
-        .then((response) => {
-          console.log('Question added successfully:', response.data);
-          // Handle success (e.g., show a success message or redirect)
-          setLoading(false);
-        })
-        .catch((error) => {
-          console.error('Error adding question:', error);
-          // Handle error (e.g., display an error message)
-          setLoading(false);
-        });
+      // Handle the case when no questionId is provided (e.g., creating a new question)
+      // ...
     }
   };
 
