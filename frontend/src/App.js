@@ -20,6 +20,7 @@ import Home from "./pages/Home/Home";
 import AddQuiz from "./pages/Quiz/AddQuiz";
 import ViewQuizList from "./pages/Quiz/ViewQuizList";
 import QuizOverview from "./pages/Quiz/QuizOverview";
+import AdminDashboard from "./pages/adminDashboard/AdminDashboard";
 
 function App() {
     const [user, setUser] = useState(null);
@@ -30,12 +31,13 @@ function App() {
         <div className="app">
             <BrowserRouter>
                 <Routes>
-                    <Route path="/home" element={<Home/>} />
+                    <Route path="/admindashboard" element={<AdminDashboard/>} />
+                    <Route path="/" element={<Home/>} />
                    <Route path="/qadmin" element={<QuestionOverview/>} />
                     <Route path="/questions" element={<Question/>} />
                     <Route path="/question/:questionId" element={<QuestionView/>} />
                     <Route path="/chat" element={<Chat />} />
-                    <Route path="/" element={<Landing />} />
+                    <Route path="/compiler" element={<Landing />} />
                     <Route path="/addQuestion" element={<AddQuestion/>} />
                     <Route path="/qadmin/updateQuestion/:questionId" element={<UpdateQuestion/>} />
                     <Route path="/company/addCompany" element={<AddCompany/>} />
