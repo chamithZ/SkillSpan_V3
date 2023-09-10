@@ -232,7 +232,7 @@ const Landing = () => {
       <div className="flex flex-col lg:flex-row bg-gradient-to-r from-blue-300 via-white to-gray-100 h-screen">
         {/* Left Side: Question Display */}
         <div className="lg:w-1/2 p-4 bg-blue-200 text-black rounded shadow mb-4 lg:mb-0">
-          {/* Your question content and lead code display here */}
+          
           <h2 className="text-xl font-semibold mb-2">{question.title}</h2>
 
           <p className="text-black">{question.question}</p>

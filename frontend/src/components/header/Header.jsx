@@ -8,7 +8,7 @@ function Header() {
 
   const isLoggedIn = () => {
    
-    const token = localStorage.getItem('jwtToken'); // Replace with your token storage method
+    const token = localStorage.getItem('jwtToken'); 
     return !!token; // Return true if the token exists, false otherwise
   };
 
@@ -22,10 +22,10 @@ function Header() {
       cancelButtonText: 'Cancel',
     }).then((result) => {
       if (result.isConfirmed) {
-        // Clear the authentication data (e.g., JWT token)
+        // Clear the authentication data
         localStorage.removeItem('jwtToken');
   
-        window.location.href = '/'; // Replace with your login page URL
+        window.location.href = '/'; // direct to home page URL
         setShowLogoutButton(false);
       }
 

@@ -13,7 +13,7 @@ function AddQuestion() {
     answer: '',
     level: '',
     HotelImg: '',
-    isApproved: true, // Default value for isApproved
+    isApproved: true, 
   });
 
   // Define options for Type and Level dropdowns

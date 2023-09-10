@@ -69,14 +69,14 @@ const AddQuiz = () => {
           icon: 'success',
           confirmButtonText: 'OK',
         }).then(() => {
-          // Redirect to the admin page (replace '/admin' with your desired URL)
+          // Redirect to the admin page
           window.location.href = '/admindashboard';
         });
   
       })
       .catch((error) => {
         console.error('Error submitting quiz:', error);
-        // Handle errors, e.g., display an error message to the user.
+        // Handle errors
       });
   };
 
