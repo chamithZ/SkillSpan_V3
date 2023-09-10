@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from '../../components/header/Header';
 import Footer from '../../components/footer/Footer';
-import Typed from 'react-typed';
+// import Typed from 'react-typed';
 import { Link } from 'react-router-dom';
 import cover from './cover.png';
 
@@ -23,13 +23,13 @@ function Home() {
           <div className="container mx-auto">
             <h1 className="text-4xl font-semibold">
               Welcome to{' '}
-              <Typed
+              {/* <Typed
                 className="text-4xl sm:text-4xl font-bold text-[#3b5bc5]"
                 strings={['SkillSpan']}
                 typeSpeed={120}
                 backSpeed={140}
                 loop
-              />{' '}
+              />{' '} */}
             </h1>
             <p className="mt-2 text-lg">Empowering Students Through Knowledge</p>
           </div>
