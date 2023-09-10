@@ -90,3 +90,8 @@ connectDB().then(() => {
 );
 
 
+// sehan backend routes
+app.use(require("./routes/companyRoute.js"))
+app.use(require("./routes/roadMapRoute.js"))
+app.use(require("./routes/assignmentRoute.js"))
+app.use(require('./routes/userRoutes.js'));
