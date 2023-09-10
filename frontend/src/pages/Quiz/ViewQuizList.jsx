@@ -46,7 +46,7 @@ const ViewQuizList = () => {
           onChange={(e) => setFilterType(e.target.value)}
         >
           <option value="">All Types</option>
-          <option value="javascript">JavaScript</option>
+          <option value="js">JavaScript</option>
           <option value="python">Python</option>
           <option value="java">Java</option>
           <option value="csharp">C#</option>
@@ -55,7 +55,7 @@ const ViewQuizList = () => {
           onClick={handleFilter}
           className="bg-blue-500 text-white px-4 py-2 rounded-r"
         >
-          Filter
+          Search
         </button>
       </div>
       <div className="mt-4">

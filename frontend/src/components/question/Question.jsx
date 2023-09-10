@@ -41,9 +41,15 @@ function QuestionList() {
           value={filter}
         >
           <option value="">All Languages</option>
-          <option value="JavaScript">JavaScript</option>
-          <option value="Python">Python</option>
-          <option value="Java">Java</option>
+          <option value="js">JavaScript</option>
+          <option value="python">Python</option>
+          <option value="java">Java</option>
+          <option value="c">C</option>
+          <option value="c++">C++</option>
+          <option value="c#">C#</option>
+          <option value="php">PHP</option>
+          <option value="ruby">Ruby</option>
+          <option value="sql">SQL</option>
         </select>
 
         {/* Difficulty Level Filter */}

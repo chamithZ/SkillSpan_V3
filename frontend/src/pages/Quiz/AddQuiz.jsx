@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Axios from 'axios';
+import Swal from 'sweetalert2';
 
 const AddQuiz = () => {
   const [formData, setFormData] = useState({
@@ -60,7 +61,18 @@ const AddQuiz = () => {
     Axios.post('/quiz/quizsets', formData)
       .then((response) => {
         console.log('Quiz submitted successfully:', response.data);
-        // You can add additional handling here, such as showing a success message or redirecting to another page.
+        
+        // Display a SweetAlert notification for success
+        Swal.fire({
+          title: 'Success!',
+          text: 'Quiz has been added successfully!',
+          icon: 'success',
+          confirmButtonText: 'OK',
+        }).then(() => {
+          // Redirect to the admin page (replace '/admin' with your desired URL)
+          window.location.href = '/admindashboard';
+        });
+  
       })
       .catch((error) => {
         console.error('Error submitting quiz:', error);

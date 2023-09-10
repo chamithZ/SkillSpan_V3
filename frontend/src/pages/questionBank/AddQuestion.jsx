@@ -1,5 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
+import Swal from 'sweetalert2';
+
 
 function AddQuestion() {
   // Define state variables to store form input values
@@ -16,9 +18,13 @@ function AddQuestion() {
 
   // Define options for Type and Level dropdowns
   const typeOptions = [
-    { label: 'Multiple Choice', value: 'Multiple Choice' },
-    { label: 'True/False', value: 'True/False' },
-    { label: 'Short Answer', value: 'Short Answer' },
+    { label: 'Select Language', value: 'Multiple Choice' },
+    { label: 'Java', value: 'java' },
+    { label: 'JS', value: 'js' },
+    { label: 'C', value: 'c' },
+    { label: 'C#', value: 'C#' },
+    { label: 'SQL', value: 'sql' },
+    { label: 'Python', value: 'python' },
     { label: 'Other', value: 'Other' },
   ];
 
@@ -40,20 +46,31 @@ function AddQuestion() {
   // Function to handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    
-
-    axios.post('/question/add', formData)
-    .then((response) => {
-      console.log('Request successful:', response.data);
-      // Handle success
-    })
-    .catch((error) => {
-      console.error('Request error:', error);
-      // Handle error
-    });
   
+    axios
+      .post('/question/add', formData)
+      .then((response) => {
+        console.log('Request successful:', response.data);
+        
+        // Display a SweetAlert notification for success
+        Swal.fire({
+          title: 'Success!',
+          text: 'Question has been successfully added!',
+          icon: 'success',
+          confirmButtonText: 'OK',
+        }).then(() => {
+          // Redirect to another page (replace '/questions' with your desired URL)
+          window.location.href = '/admindashboard';
+        });
+  
+      })
+      .catch((error) => {
+        console.error('Request error:', error);
+        // Handle error
+      });
   };
+  
+
 
   return (
     <div className="container mx-auto p-4">
