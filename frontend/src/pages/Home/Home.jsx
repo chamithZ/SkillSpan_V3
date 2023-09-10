@@ -7,7 +7,6 @@ import cover from './cover.png';
 
 function Home() {
   // Check if the user is logged in based on your authentication logic
-  // For example, you might check for the presence of a JWT token in localStorage
   const isLoggedIn = () => {
     // Check if the user is logged in by retrieving the token from localStorage
     const token = localStorage.getItem('jwtToken');

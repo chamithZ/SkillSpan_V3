@@ -16,7 +16,7 @@ const ViewQuizList = () => {
   }, []);
 
   const fetchQuizzes = () => {
-    Axios.get('/quiz/quizzes') // Replace with your API endpoint
+    Axios.get('/quiz/quizzes') // Replace with API endpoint
       .then((response) => {
         setQuizzes(response.data.quizzes);
       })

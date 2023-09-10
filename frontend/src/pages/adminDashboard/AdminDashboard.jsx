@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import userIcon from '../../components/header/user.png'; // Import your user profile icon image
+import userIcon from '../../components/header/user.png'; 
 import Swal from 'sweetalert2';
 
 function Header() {
@@ -85,7 +85,7 @@ function AdminDashboard() {
           </Link>
 
           {/* View Quizzes Button */}
-          <Link to="/">
+          <Link to="/qadminquizview">
             <button
               className="w-full bg-blue-200 hover:bg-blue-300 text-black font-semibold py-2 px-4 rounded-lg"
             >

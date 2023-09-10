@@ -30,7 +30,7 @@ function Login() {
           icon: 'success',
           confirmButtonText: 'OK',
         }).then(() => {
-          // Redirect to the home page after clicking OK
+          
           window.location.href = '/'; // Replace with your home page URL
         });
       } else {
