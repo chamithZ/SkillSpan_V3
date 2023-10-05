@@ -40,3 +40,24 @@ By fostering collaboration and innovation, it aims to equip the next generation 
 
 License:
 SkillSpan is licensed under the MIT License
+
+Home
+![Screenshot 2023-10-05 203814](https://github.com/chamithZ/SkillSpan_V3/assets/89042294/34f7a898-84ec-4be0-8f68-0088de561678)
+
+Companies 
+![Screenshot 2023-10-05 203945](https://github.com/chamithZ/SkillSpan_V3/assets/89042294/0476b8bf-9e82-48d8-8afc-64ea1ab9a331)
+
+Question bank
+![Screenshot 2023-10-05 203912](https://github.com/chamithZ/SkillSpan_V3/assets/89042294/536ba85e-3f09-4831-8fd8-8c93258a1ccc)
+
+Online compiler 
+![Screenshot 2023-10-05 204440](https://github.com/chamithZ/SkillSpan_V3/assets/89042294/5d093b52-5a30-49b9-97b7-a9ed50ff7662)
+
+Quizzes
+![Screenshot 2023-10-05 204045](https://github.com/chamithZ/SkillSpan_V3/assets/89042294/ba62f1b0-82f8-4a57-8728-1e150aaefa20)
+
+Quiz overview
+![Screenshot 2023-10-05 204534](https://github.com/chamithZ/SkillSpan_V3/assets/89042294/01fdc60a-a765-4d27-af57-3dd370b62fd6)
+
+
+
