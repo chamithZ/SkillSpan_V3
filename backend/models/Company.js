@@ -20,6 +20,9 @@ const companySchema = new Schema({
   email: {
     type: String,
   },
+  description: {
+    type: String,
+  },
 }); 
 
 module.exports = mongoose.model("Company", companySchema);

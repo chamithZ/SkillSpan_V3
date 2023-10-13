@@ -93,12 +93,21 @@ function AdminDashboard() {
             </button>
           </Link>
 
-          {/* View Companies Button */}
-          <Link to="/company">
+          {/* View Quizzes Button */}
+          <Link to="/qadminquizview">
             <button
               className="w-full bg-blue-200 hover:bg-blue-300 text-black font-semibold py-2 px-4 rounded-lg"
             >
-              View Companies
+              View Quizzes
+            </button>
+          </Link>
+
+          {/* View Companies Button */}
+          <Link to="/manageCompany">
+            <button
+              className="w-full bg-blue-200 hover:bg-blue-300 text-black font-semibold py-2 px-4 rounded-lg"
+            >
+              Manage Companies
             </button>
           </Link>
         </div>

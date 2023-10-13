@@ -22,6 +22,7 @@ import ViewQuizList from "./pages/Quiz/ViewQuizList";
 import QuizOverview from "./pages/Quiz/QuizOverview";
 import Qadminquizview from "./pages/Quiz/Qadminquizview";
 import AdminDashboard from "./pages/adminDashboard/AdminDashboard";
+import ManageCompany from "./pages/Company/ManageCompany";
 
 function App() {
     const [user, setUser] = useState(null);
@@ -53,6 +54,7 @@ function App() {
                     <Route path="/quizlist" element={<ViewQuizList/>} />
                     <Route path="/quiz/:quizSetId" element={<QuizOverview/>} />
                     <Route path="/qadminquizview" element={<Qadminquizview/>} />
+                    <Route path="/manageCompany" element={<ManageCompany/>} />
 
 
                  
