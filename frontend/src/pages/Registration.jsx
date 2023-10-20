@@ -46,7 +46,7 @@ function Registration() {
   
 
   return (
-    <div className="container mx-auto mt-10 bg-blue-100 min-h-screen flex justify-center items-center">
+    <div className="container mx-auto pt-5 bg-blue-100 min-h-screen flex justify-center items-center">
       <div className="max-w-md w-full bg-white p-6 rounded-lg shadow-md">
         <h2 className="text-3xl text-blue-500 font-semibold text-center mb-4">Join with SkillSpan</h2>
         <form onSubmit={handleSubmit}>
@@ -65,7 +65,7 @@ function Registration() {
           <div className="mb-4">
             <label htmlFor="password" className="text-blue-500">Password</label>
             <input
-              type="password"
+              type="text"
               id="password"
               name="password"
               value={formData.password}

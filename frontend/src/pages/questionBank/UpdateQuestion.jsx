@@ -79,12 +79,12 @@ function UpdateQuestion() {
         })
         .catch((error) => {
           console.error('Error updating question:', error);
-          // Handle error (e.g., display an error message)
+          // Handle error
           setLoading(false);
         });
     } else {
-      // Handle the case when no questionId is provided (e.g., creating a new question)
-      // ...
+      // Handle the case when no questionId is provided 
+     
     }
   };
 

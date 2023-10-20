@@ -11,6 +11,7 @@ function UpdateCompany() {
     industry: '',
     contactNumber: '',
     email: '',
+    
   });
 
   const handleChange = (e) => {
@@ -119,6 +120,19 @@ function UpdateCompany() {
           onChange={handleChange}
           className="w-full border p-2 rounded-md focus:ring-blue-500 focus:border-blue-500"
         />
+      </div>
+      <div>
+      <label className="block text-sm font-semibold">Description:</label>
+          <textarea
+            rows="4"
+            name="description"
+            value={formData.description}
+            onChange={handleChange}
+            className="w-full border p-2 rounded-md focus:ring-blue-500 focus:border-blue-500"
+            placeholder="Enter Description"
+            maxLength="300"
+            required
+          />
       </div>
       <div>
         <button

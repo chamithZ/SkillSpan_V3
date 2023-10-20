@@ -8,7 +8,7 @@ function Header() {
 
   const isLoggedIn = () => {
    
-    const token = localStorage.getItem('jwtToken'); // Replace with your token storage method
+    const token = localStorage.getItem('jwtToken'); 
     return !!token; // Return true if the token exists, false otherwise
   };
 
@@ -22,10 +22,10 @@ function Header() {
       cancelButtonText: 'Cancel',
     }).then((result) => {
       if (result.isConfirmed) {
-        // Clear the authentication data (e.g., JWT token)
+        // Clear the authentication data
         localStorage.removeItem('jwtToken');
   
-        window.location.href = '/'; // Replace with your login page URL
+        window.location.href = '/'; // direct to home page URL
         setShowLogoutButton(false);
       }
 
@@ -39,9 +39,9 @@ function Header() {
         <div>
           <Link
             to="/"
-            className="text-2xl font-semibold text-blue-500 hover:font-bold "
+            className="text-2xl font-semibold text-black  "
           >
-            SkillSpan
+            Sk<span className='text-blue-700'>i</span>llSpan
           </Link>
         </div>
 
@@ -53,7 +53,7 @@ function Header() {
             hover:text-blue-700 hover:font-medium
             capitalize
             inline-block
-            text-2xl
+            text-xl
             text-semi bold
             text-blue-700
             relative
@@ -86,7 +86,7 @@ function Header() {
             hover:text-blue-700 hover:font-medium
             capitalize
             inline-block
-            text-2xl
+            text-xl
             text-blue-700
             relative
             cursor-pointer
@@ -118,7 +118,7 @@ function Header() {
             hover:text-blue-700 hover:font-medium
             capitalize
             inline-block
-            text-2xl
+            text-xl
             text-blue-700
             relative
             cursor-pointer
@@ -150,7 +150,7 @@ function Header() {
             hover:text-blue-700 hover:font-medium
             capitalize
             inline-block
-            text-2xl
+            text-xl
             text-blue-700
             relative
             cursor-pointer
@@ -182,7 +182,7 @@ function Header() {
             hover:text-blue-700 hover:font-medium
             capitalize
             inline-block
-            text-2xl
+            text-xl
             text-blue-700
             relative
             cursor-pointer

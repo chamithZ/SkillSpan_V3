@@ -30,7 +30,7 @@ function Login() {
           icon: 'success',
           confirmButtonText: 'OK',
         }).then(() => {
-          // Redirect to the home page after clicking OK
+          
           window.location.href = '/'; // Replace with your home page URL
         });
       } else {
@@ -50,7 +50,7 @@ function Login() {
         <p className="text-gray-500 mb-4">Continue your learning journey.</p>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label htmlFor="username" className="text-blue-500">Username</label>
+            <label htmlFor="username" className="text-blue-500">Email</label>
             <input
               type="text"
               id="username"

@@ -22,8 +22,7 @@ function QuestionList() {
   }, [filter, search, levelFilter]);
 
   const handleUpdateQuestion = (questionId) => {
-    // Implement your update logic here, e.g., navigate to an update page
-    // You can use React Router for navigation: history.push(`/update/${questionId}`)
+    
   };
 
   const handleDeleteQuestion = async (questionId) => {
