@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import jsPDF from 'jspdf';
+import Swal from 'sweetalert2';
+
 
 const QuizOverview = () => {
   const [quizzes, setQuizzes] = useState([]);
@@ -12,11 +14,28 @@ const QuizOverview = () => {
   const [timeLeft, setTimeLeft] = useState(7200); // 2 hours in seconds
   const [quizSetTitle, setQuizSetTitle] = useState('');
   const [quizSubmitted, setQuizSubmitted] = useState(false);
+  const navigate = useNavigate();
+ 
   let timer;
 
   const { quizSetId } = useParams();
 
   useEffect(() => {
+
+    const token = localStorage.getItem('jwtToken');
+
+    // Check if the token is available
+    if (!token) {
+      // Token is not available, show a SweetAlert2 alert and redirect to the login page
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Please log in to access this page!',
+      }).then(() => {
+        navigate('/login'); // Redirect to the login page
+      });
+      return;
+    }
     fetchQuizSet();
     startTimer();
   }, []);
