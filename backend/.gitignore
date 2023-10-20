@@ -1,3 +1,5 @@
 
 # dependence
 node_modules
+
+.env
