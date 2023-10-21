@@ -39,18 +39,18 @@ function GetSingleRoadMap() {
     navigate(`/assignment/getOne/${id}/${id2}`);
   };
 
-  
-
   return (
     <div className="container mx-auto p-8">
       <div className="bg-white rounded-lg shadow-lg overflow-hidden">
         <div className="p-4">
           <h1 className="text-2xl font-semibold">{roadmap.title}</h1>
+          <br/>
           <p className="text-gray-500 mb-4">{roadmap.description}</p>
-          <div className="mb-4">
+        </div>
+        <div className="mb-4 flex">
+          <div className="w-1/2 px-20 py-40">
             <div className="mb-2">
-              <span className="font-semibold">Duration:</span>{" "}
-              {roadmap.duration}
+              <span className="font-semibold">Duration:</span> {roadmap.duration}
             </div>
             {roadmap.skillsCovered && roadmap.skillsCovered.length > 0 && (
               <div className="mb-2">
@@ -76,51 +76,58 @@ function GetSingleRoadMap() {
               <span className="font-semibold">Additional Notes:</span>{" "}
               {roadmap.additionalNotes}
             </div>
-
             <button
               onClick={() => fetchAssignments()}
               className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 mt-4"
             >
               Show Assignments
             </button>
-            {showAssignments && (
-              <div>
-                <h2 className="text-xl font-semibold mt-4">Assignments</h2>
-                <table className="w-full mt-4">
-                  <thead>
-                    <tr>
-                      <th>Title</th>
-                      <th>Description</th>
-                      <th>Difficulty Level</th>   
-                      <th>Skills Required</th>
-                      <th>Actions</th>{" "}
-                      {/* Add a new column for the view button */}
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {assignments.map((assignment) => (
-                      <tr key={assignment._id}>
-                        <td>{assignment.title}</td>
-                        <td>{assignment.description}</td>
-                        <td>{assignment.difficultyLevel}</td>
-                        <td>{assignment.skillsRequired.join(", ")}</td>
-                        <td>
-                          <button
-                            onClick={()=>{showRoadMapDetails(assignment._id)}}
-                            className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
-                          >
-                            View
-                          </button>
-                        </td>
-                      </tr>
-                      
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            )}
+          </div>
+          <div className="w-1/2 p-4">
+            {/* Add an image element with the image source */}
+            <img
+              src="/images/roadmap.png" // Replace with the actual image source
+              alt="Roadmap Image"
+              className="object-cover w-full h-auto"
+            />
           </div>
         </div>
+        {showAssignments && (
+          <div>
+            <h2 className="text-xl font-semibold mt-4">Assignments</h2>
+            <table className="w-full mt-4">
+              <thead>
+                <tr>
+                  <th>Title</th>
+                  <th>Description</th>
+                  <th>Difficulty Level</th>
+                  <th>Skills Required</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {assignments.map((assignment) => (
+                  <tr key={assignment._id}>
+                  <td className="text-center">{assignment.title}</td>
+                  <td className="text-center">{assignment.description}</td>
+                  <td className="text-center">{assignment.difficultyLevel}</td>
+                  <td className="text-center">{assignment.skillsRequired.join(", ")}</td>
+                  <td className="text-center">
+                    <button
+                      onClick={() => showRoadMapDetails(assignment._id)}
+                      className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
+                    >
+                      View
+                    </button>
+                  </td>
+                </tr>
+                 
+                
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
       </div>
     </div>
   );

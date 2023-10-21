@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from '../../components/header/Header';
 import Footer from '../../components/footer/Footer';
-import Typed from 'react-typed';
+// import Typed from 'react-typed';
 import { Link } from 'react-router-dom';
 import cover from './cover.png';
 
@@ -20,7 +20,7 @@ function Home() {
       
         <header className="bg-blue-200 text-black py-4">
           <div className="container mx-auto">
-            <h1 className="text-4xl font-semibold">
+            {/* <h1 className="text-4xl font-semibold">
               Welcome to{' '}
               <Typed
                 className="text-4xl sm:text-4xl font-bold text-[#3b5bc5]"
@@ -29,7 +29,7 @@ function Home() {
                 backSpeed={140}
                 loop
               />{' '}
-            </h1>
+            </h1> */}
             <p className="mt-2 text-lg">Empowering Students Through Knowledge</p>
           </div>
         </header>

@@ -101,6 +101,14 @@ function AdminDashboard() {
               View Companies
             </button>
           </Link>
+          {/* Add Companies Button */}
+          <Link to="/company/addCompany">
+            <button
+              className="w-full bg-blue-200 hover:bg-blue-300 text-black font-semibold py-2 px-4 rounded-lg"
+            >
+              Add Companies
+            </button>
+          </Link>
         </div>
       </section>
     </div>

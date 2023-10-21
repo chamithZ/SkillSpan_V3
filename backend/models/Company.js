@@ -20,6 +20,12 @@ const companySchema = new Schema({
   email: {
     type: String,
   },
+  companyDetails : {
+    type : String,
+  },
+  dp: {
+    type: String, // Store the path/reference to the image
+  },
 }); 
 
 module.exports = mongoose.model("Company", companySchema);
