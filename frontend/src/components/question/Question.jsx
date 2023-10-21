@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Header from '../header/Header';
+import Footer from '../footer/Footer';
 
 
 function QuestionList() {
@@ -15,7 +16,7 @@ function QuestionList() {
       const response = await axios.get(`/question/filter?type=${filter}&search=${search}&level=${levelFilter}`);
       setFilteredQuestions(response.data);
     } catch (error) {
-      console.error('Error fetching filtered questions:', error);
+      console.error('Error fetching questions:', error);
     }
   };
 
@@ -29,8 +30,11 @@ function QuestionList() {
 <Header/>
     <div className="container mx-auto p-4">
        
-      <h1 className="text-3xl font-medium mb-4 text-blue-800">
+      <h1 className="text-3xl font-medium mb-4 text-blue-600">
     Explore the questions</h1>
+    <p className='mb-5'>
+      You can explore the questions here. You can filter the questions by language, difficulty level, or search by title.
+    </p>
 
       {/* Filters */}
       <div className="flex space-x-4 mb-4 flex-wrap ">
@@ -89,6 +93,7 @@ function QuestionList() {
         ))}
       </div>
     </div>
+    <Footer/>
     </div>
   );
 }

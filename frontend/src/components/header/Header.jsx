@@ -39,9 +39,9 @@ function Header() {
         <div>
           <Link
             to="/"
-            className="text-2xl font-semibold text-blue-500 hover:font-bold "
+            className="text-2xl font-semibold text-black  "
           >
-            SkillSpan
+            Sk<span className='text-blue-700'>i</span>llSpan
           </Link>
         </div>
 
@@ -53,7 +53,7 @@ function Header() {
             hover:text-blue-700 hover:font-medium
             capitalize
             inline-block
-            text-2xl
+            text-xl
             text-semi bold
             text-blue-700
             relative
@@ -86,7 +86,7 @@ function Header() {
             hover:text-blue-700 hover:font-medium
             capitalize
             inline-block
-            text-2xl
+            text-xl
             text-blue-700
             relative
             cursor-pointer
@@ -118,7 +118,7 @@ function Header() {
             hover:text-blue-700 hover:font-medium
             capitalize
             inline-block
-            text-2xl
+            text-xl
             text-blue-700
             relative
             cursor-pointer
@@ -150,7 +150,7 @@ function Header() {
             hover:text-blue-700 hover:font-medium
             capitalize
             inline-block
-            text-2xl
+            text-xl
             text-blue-700
             relative
             cursor-pointer
@@ -182,7 +182,7 @@ function Header() {
             hover:text-blue-700 hover:font-medium
             capitalize
             inline-block
-            text-2xl
+            text-xl
             text-blue-700
             relative
             cursor-pointer

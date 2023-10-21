@@ -37,9 +37,9 @@ const ViewQuizList = () => {
   return (
     <div>
     <Header/>
-    <div className="container mx-auto mt-8">
+    <div className="container mx-auto p-4">
         
-      <h1 className="text-3xl font-medium mb-4 text-blue-800">Quizzes</h1>
+      <h1 className="text-3xl font-medium mb-4 text-blue-600">Quizzes</h1>
       <div className="flex mb-4">
         <select
           className="border rounded-l  p-2  border-blue-400 rounded-md text-darkblue bg-lightblue" 
@@ -60,7 +60,7 @@ const ViewQuizList = () => {
       </div>
       <div className="mt-4">
         {(filterType === '' ? quizzes : filteredQuizzes).map((quiz) => (
-          <Link to={`/quiz/${quiz._id}`} className="text-blue-500 hover:underline">
+          <Link to={`/quiz/${quiz._id}`} className="text-black hover:underline">
           <div
             key={quiz._id}
             className="bg-white border p-4 rounded shadow-md mb-4"
