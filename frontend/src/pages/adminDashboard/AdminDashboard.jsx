@@ -22,14 +22,15 @@ function Header() {
       };
   return (
     <header className="border-b-2 p-4 flex justify-between items-center">
-      <div>
-        <Link
-          to="/"
-          className="text-2xl font-semibold text-blue-500 hover:font-bold"
-        >
-          SkillSpan
-        </Link>
-      </div>
+       <div>
+          <Link
+            to="/admindashboard"
+            className="text-2xl font-semibold text-black  "
+          >
+            Sk<span className='text-blue-700'>i</span>llSpan
+          </Link>
+        </div>
+
 
       {/* User Profile Icon */}
       <div>

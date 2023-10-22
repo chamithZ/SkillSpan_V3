@@ -6,7 +6,7 @@ const AddQuiz = () => {
   const [formData, setFormData] = useState({
     title: '',
     description: '',
-    type: '', // Updated the state key to 'type'
+    type: '',
     questions: [
       {
         question: '',
@@ -16,9 +16,16 @@ const AddQuiz = () => {
     ],
   });
 
+  const [errors, setErrors] = useState({
+    title: '',
+    type: '',
+    questions: [{}], // Use an array to track errors for each question
+  });
+
   const handleInputChange = (e, questionIndex, answerIndex) => {
     const { name, value } = e.target;
     const updatedFormData = { ...formData };
+    updatedFormData.questions = [...updatedFormData.questions]; // Clone the questions array
 
     if (name === 'title' || name === 'description') {
       updatedFormData[name] = value;
@@ -28,7 +35,7 @@ const AddQuiz = () => {
       updatedFormData.questions[questionIndex].answers[answerIndex] = value;
     } else if (name === 'correctAnswer') {
       updatedFormData.questions[questionIndex].correctAnswer = parseInt(value);
-    } else if (name === 'type') { // Handle 'type' changes
+    } else if (name === 'type') {
       updatedFormData.type = value;
     }
 
@@ -47,37 +54,85 @@ const AddQuiz = () => {
         },
       ],
     }));
-  };
-
-  const removeQuestion = (questionIndex) => {
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      questions: prevFormData.questions.filter((_, index) => index !== questionIndex),
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      questions: [...prevErrors.questions, {}],
     }));
   };
 
-  const submitForm = () => {
-    // Send formData to your backend API
-    Axios.post('/quiz/quizsets', formData)
-      .then((response) => {
-        console.log('Quiz submitted successfully:', response.data);
-        
-        // Display a SweetAlert notification for success
-        Swal.fire({
-          title: 'Success!',
-          text: 'Quiz has been added successfully!',
-          icon: 'success',
-          confirmButtonText: 'OK',
-        }).then(() => {
-          // Redirect to the admin page
-          window.location.href = '/admindashboard';
-        });
-  
-      })
-      .catch((error) => {
-        console.error('Error submitting quiz:', error);
-        // Handle errors
+  const removeQuestion = (questionIndex) => {
+    const updatedFormData = { ...formData };
+    updatedFormData.questions = updatedFormData.questions.filter((_, index) => index !== questionIndex);
+
+    const updatedErrors = { ...errors };
+    updatedErrors.questions = errors.questions.filter((_, index) => index !== questionIndex);
+
+    setFormData(updatedFormData);
+    setErrors(updatedErrors);
+  };
+
+  const validateForm = () => {
+    let formIsValid = true;
+
+    const newErrors = {
+      title: '',
+      type: '',
+      questions: formData.questions.map((_, index) => ({})),
+    };
+
+    if (formData.title.trim() === '') {
+      newErrors.title = 'Title is required';
+      formIsValid = false;
+    }
+
+    if (formData.type.trim() === '') {
+      newErrors.type = 'Language is required';
+      formIsValid = false;
+    }
+
+    formData.questions.forEach((question, questionIndex) => {
+      if (question.question.trim() === '') {
+        newErrors.questions[questionIndex].question = 'Question is required';
+        formIsValid = false;
+      }
+
+      question.answers.forEach((answer, answerIndex) => {
+        if (answer.trim() === '') {
+          newErrors.questions[questionIndex][answerIndex] = 'Answer is required';
+          formIsValid = false;
+        }
       });
+
+      if (question.correctAnswer === null) {
+        newErrors.questions[questionIndex].correctAnswer = 'Please select the correct answer';
+        formIsValid = false;
+      }
+    });
+
+    setErrors(newErrors);
+    return formIsValid;
+  };
+
+  const submitForm = () => {
+    if (validateForm()) {
+      Axios.post('/quiz/quizsets', formData)
+        .then((response) => {
+          console.log('Quiz submitted successfully:', response.data);
+
+          Swal.fire({
+            title: 'Success!',
+            text: 'Quiz has been added successfully!',
+            icon: 'success',
+            confirmButtonText: 'OK',
+          }).then(() => {
+            window.location.href = '/admindashboard';
+          });
+        })
+        .catch((error) => {
+          console.error('Error submitting quiz:', error);
+          // Handle errors
+        });
+    }
   };
 
   return (
@@ -92,11 +147,12 @@ const AddQuiz = () => {
           onChange={(e) => handleInputChange(e)}
           className="border rounded px-4 py-2 w-full focus:outline-none focus:ring focus:ring-blue-200"
         />
+        {errors.title && <p className="text-red-500">{errors.title}</p>}
       </div>
       <div className="mb-4">
         <label className="block text-gray-700 text-sm font-bold mb-2">Language:</label>
         <select
-          name="type" 
+          name="type"
           value={formData.type}
           onChange={(e) => handleInputChange(e)}
           className="border rounded px-4 py-2 w-full focus:outline-none focus:ring focus:ring-blue-200"
@@ -107,6 +163,7 @@ const AddQuiz = () => {
           <option value="java">Java</option>
           <option value="csharp">C#</option>
         </select>
+        {errors.type && <p className="text-red-500">{errors.type}</p>}
       </div>
       <div className="mb-4">
         <label className="block text-gray-700 text-sm font-bold mb-2">Description:</label>
@@ -131,6 +188,9 @@ const AddQuiz = () => {
               onChange={(e) => handleInputChange(e, questionIndex)}
               className="border rounded px-4 py-2 w-full focus:outline-none focus:ring focus:ring-blue-200"
             />
+            {errors.questions[questionIndex] && (
+              <p className="text-red-500">{errors.questions[questionIndex].question}</p>
+            )}
           </div>
           <div className="mb-4">
             <h4 className="text-lg font-semibold mb-2">Answers:</h4>
@@ -143,6 +203,12 @@ const AddQuiz = () => {
                   onChange={(e) => handleInputChange(e, questionIndex, answerIndex)}
                   className="border rounded px-4 py-2 w-full focus:outline-none focus:ring focus:ring-blue-200"
                 />
+                {errors.questions[questionIndex] &&
+                  errors.questions[questionIndex][answerIndex] && (
+                    <p className="text-red-500">
+                      {errors.questions[questionIndex][answerIndex]}
+                    </p>
+                  )}
               </div>
             ))}
           </div>
@@ -160,6 +226,11 @@ const AddQuiz = () => {
                 </option>
               ))}
             </select>
+            {errors.questions[questionIndex] && errors.questions[questionIndex].correctAnswer && (
+              <p className="text-red-500">
+                {errors.questions[questionIndex].correctAnswer}
+              </p>
+            )}
           </div>
           <button
             onClick={() => removeQuestion(questionIndex)}

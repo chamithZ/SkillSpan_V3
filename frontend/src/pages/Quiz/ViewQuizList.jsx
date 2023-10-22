@@ -60,7 +60,7 @@ const ViewQuizList = () => {
       </div>
       <div className="mt-4">
         {(filterType === '' ? quizzes : filteredQuizzes).map((quiz) => (
-          <Link to={`/quiz/${quiz._id}`} className="text-black hover:underline">
+          <Link to={`/quiz/${quiz._id}`} className="text-black">
           <div
             key={quiz._id}
             className="bg-white border p-4 rounded shadow-md mb-4"
