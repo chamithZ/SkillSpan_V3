@@ -1,21 +1,41 @@
 import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
+import jsPDF from 'jspdf';
+import Swal from 'sweetalert2';
+
 
 const QuizOverview = () => {
   const [quizzes, setQuizzes] = useState([]);
   const [userAnswers, setUserAnswers] = useState([]);
   const [results, setResults] = useState(null);
-  const [showResults, setShowResults] = useState(false);
+  const [percentageScore, setPercentageScore] = useState(null); // [1
   const [showCorrectAnswers, setShowCorrectAnswers] = useState(false);
   const [timeLeft, setTimeLeft] = useState(7200); // 2 hours in seconds
   const [quizSetTitle, setQuizSetTitle] = useState('');
-  const [quizSubmitted, setQuizSubmitted] = useState(false); // Flag to track if the quiz is submitted
+  const [quizSubmitted, setQuizSubmitted] = useState(false);
+  const navigate = useNavigate();
+ 
   let timer;
 
   const { quizSetId } = useParams();
 
   useEffect(() => {
+
+    const token = localStorage.getItem('jwtToken');
+
+    // Check if the token is available
+    if (!token) {
+      // Token is not available, show a SweetAlert2 alert and redirect to the login page
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Please log in to access this page!',
+      }).then(() => {
+        navigate('/login'); // Redirect to the login page
+      });
+      return;
+    }
     fetchQuizSet();
     startTimer();
   }, []);
@@ -50,6 +70,67 @@ const QuizOverview = () => {
       });
   };
 
+  const handleGenerateCertificate = () => {
+    const token = localStorage.getItem('jwtToken'); // Retrieve the JWT token from local storage
+    console.log('Token:', token);
+  
+    if (results) {
+      const pdf = new jsPDF();
+      pdf.setFont('helvetica');
+  
+      // Set blue color for the border
+      pdf.setDrawColor(0, 0, 255);
+  
+      // Draw a rectangle border around the certificate
+      pdf.rect(10, 10, 190, 270); // Adjust the coordinates and size as needed
+  
+      pdf.setTextColor(0, 0, 255);
+  
+      // Calculate the x-coordinate for centered text
+      const pageWidth = pdf.internal.pageSize.getWidth();
+      const textX = 20; // Set the x-coordinate to move the text to the left side
+  
+      pdf.text(textX, 20, 'SkillSpan');
+  
+      pdf.setTextColor(0, 0, 0);
+  
+      const tokenPayload = JSON.parse(atob(token.split('.')[1]));
+  
+      // Get the username from the token payload
+      const username = tokenPayload.name;
+  
+      pdf.setFontSize(12);
+  
+      pdf.setFontSize(30);
+      pdf.text(textX, 50, `Certificate of Completion `);
+      pdf.text(textX, 80, ` ${quizSetTitle}`)
+  
+      // Calculate x-coordinate for the username text
+      const usernameWidth = pdf.getStringUnitWidth(`This Certificate Awarded To - ${username}`) * pdf.internal.getFontSize() / pdf.internal.scaleFactor;
+      const usernameX = textX; // Set the x-coordinate to move the text to the left side
+      pdf.setFontSize(20);
+      pdf.text(usernameX, 100, `This Certificate Awarded To - ${username}`);
+      pdf.text(textX, 120, ` ${results}`);
+  
+      // Determine the level based on the user's score
+      let level = 'Beginner';
+      if (percentageScore >= 80) {
+        level = 'Advanced';
+      } else if (percentageScore >= 60) {
+        level = 'Intermediate';
+      }
+  
+      pdf.text(textX, 140, `Level - ${level}`);
+      pdf.text(textX, 180, 'All the Best for your Future Endeavors!');
+      pdf.text(textX, 160, `Issued Date - ${new Date().toDateString()}`);
+      pdf.save('SkillSpanCertificate.pdf');
+    }
+  };
+  
+  
+  
+  
+
   const handleAnswerChange = (quizIndex, selectedAnswer) => {
     const updatedUserAnswers = [...userAnswers];
     updatedUserAnswers[quizIndex] = selectedAnswer;
@@ -59,41 +140,39 @@ const QuizOverview = () => {
   const handleSubmitAnswers = () => {
     let score = 0;
     const totalQuizzes = quizzes.length;
-
+  
     quizzes.forEach((quiz, index) => {
       if (userAnswers[index] === parseInt(quiz.question.correct_answer)) {
         score += 1;
       }
     });
-
+  
     const percentageScore = ((score / totalQuizzes) * 100).toFixed(2);
-
-    const resultsText = `Your score: ${score}/${totalQuizzes} (${percentageScore}%)`;
+  
+    const resultsText = `Score: ${score}/${totalQuizzes} (${percentageScore}%)`;
     setResults(resultsText);
-
+    setPercentageScore(percentageScore);
+  
     setShowCorrectAnswers(true);
-    setShowResults(true);
-
-    // Pause the timer when completed
-    clearInterval(timer);
-
-    // Set the quizSubmitted flag to true
     setQuizSubmitted(true);
+  
+    // Clear the timer when the answers are submitted
+    clearInterval(timer);
   };
-
+  
   const startTimer = () => {
     timer = setInterval(() => {
       setTimeLeft((prevTime) => {
         if (prevTime > 0 && !quizSubmitted) {
           return prevTime - 1;
         } else {
-          // Timer is completed or quiz is submitted, stop the timer
           clearInterval(timer);
           return prevTime;
         }
       });
     }, 1000);
   };
+  
 
   return (
     <div className="p-4 space-y-4">
@@ -101,7 +180,7 @@ const QuizOverview = () => {
         <div>
           <h1 className="text-2xl font-bold">{quizSetTitle}</h1>
         </div>
-        <div className="text-red-600 font-bold">
+        <div className="text-red-500 font-bold">
           Time Left: {Math.floor(timeLeft / 3600)}h {Math.floor((timeLeft % 3600) / 60)}m {timeLeft % 60}s
         </div>
       </div>
@@ -120,7 +199,7 @@ const QuizOverview = () => {
                     onChange={() => handleAnswerChange(index, answerIndex)}
                     checked={userAnswers[index] === answerIndex}
                     className="form-radio h-5 w-5 text-indigo-600"
-                    disabled={showResults || quizSubmitted}
+                    disabled={quizSubmitted}
                   />
                   <span className="ml-2">{answer}</span>
                 </label>
@@ -137,16 +216,22 @@ const QuizOverview = () => {
 
       <button
         onClick={handleSubmitAnswers}
-        className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded"
-        disabled={showResults || quizSubmitted}
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        disabled={quizSubmitted}
       >
         Submit Answers
       </button>
 
-      {showResults && (
-        <div className="mt-4 p-4 bg-green-200 border border-green-600 rounded-md">
+      {quizSubmitted && results && (
+        <div className="mt-4 p-4 bg-gray-100 border border-green-600 rounded-md">
           <strong className="text-lg text-green-800">Results:</strong>
           <p className="mt-2 text-green-800">{results}</p>
+          <button
+            onClick={handleGenerateCertificate}
+            className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded mt-4"
+          >
+            Generate Your Certificate
+          </button>
         </div>
       )}
     </div>

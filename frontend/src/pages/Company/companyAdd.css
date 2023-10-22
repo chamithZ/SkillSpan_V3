@@ -1,0 +1,11 @@
+/* YourStyles.css */
+.background-image-form {
+    background-image: url('path/to/your/background.jpg'); /* Replace 'path/to/your/background.jpg' with the actual file path */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    padding: 20px; /* Adjust the padding as needed */
+    border-radius: 10px; /* Rounded corners for the form */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Box shadow for the form */
+  }
+  

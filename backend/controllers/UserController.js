@@ -43,7 +43,7 @@ exports.login = async (req, res) => {
     // Check if the user exists
     const user = await User.findOne({ username });
     if (!user) {
-      return res.status(401).json({ message: 'Invalid credentials' });
+      return res.status(406).json({ message: 'Invalid credentials' });
     }
 
     // Verify the password
@@ -54,7 +54,7 @@ exports.login = async (req, res) => {
 
     // Generate a JWT token
     const token = jwt.sign(
-      { userId: user._id, username: user.username, role: user.role },
+      { userId: user._id, username: user.email, role: user.role, name: user.username, },
       '1234', // Replace with a secure secret key
       { expiresIn: '1h' }
     );

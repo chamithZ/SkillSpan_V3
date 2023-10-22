@@ -23,6 +23,9 @@ import QuizOverview from "./pages/Quiz/QuizOverview";
 import Qadminquizview from "./pages/Quiz/Qadminquizview";
 import AdminDashboard from "./pages/adminDashboard/AdminDashboard";
 import ViewAdminCompany from "./pages/Company/ViewAdminCompany";
+import ViewMyCompany from "./pages/Company/ViewMyCompany";
+import ManageCompany from "./pages/Company/ManageCompany";
+import AddRoadmapWithAssignments from "./pages/Company/AddRoadmapWithAssignments";
 
 
 
@@ -57,8 +60,8 @@ function App() {
                     <Route path="/quiz/:quizSetId" element={<QuizOverview/>} />
                     <Route path="/qadminquizview" element={<Qadminquizview/>} />
                     <Route path="/admin/company" element={<ViewAdminCompany/>} />
-
-                 
+                    <Route path="/manageCompany" element={<ManageCompany/>} />
+                    <Route path="/addRoadMaps" element={<AddRoadmapWithAssignments/>} />
                 </Routes>
             </BrowserRouter>
         </div>

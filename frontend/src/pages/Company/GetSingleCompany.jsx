@@ -74,6 +74,7 @@ function GetSingleCompany() {
           <p>Contact Number:</p>
           {company.contactNumber}
         </div>
+        
       </div>
     </div>
     <div className="p-4">

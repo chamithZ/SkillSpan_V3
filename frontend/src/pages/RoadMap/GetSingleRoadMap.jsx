@@ -82,6 +82,13 @@ function GetSingleRoadMap() {
             >
               Show Assignments
             </button>
+            <br/>
+            <button
+              onClick={() => fetchAssignments()}
+              className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 mt-4"
+            >
+              Enroll this roadmap
+            </button>
           </div>
           <div className="w-1/2 p-4">
             {/* Add an image element with the image source */}

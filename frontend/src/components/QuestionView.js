@@ -16,6 +16,7 @@ import CustomInput from "./CustomInput";
 import OutputDetails from "./OutputDetails";
 import ThemeDropdown from "./ThemeDropdown";
 import LanguagesDropdown from "./LanguagesDropdown";
+import Header from "./header/Header";
 
 const javascriptDefault = `/**
 * Problem: Binary Search: Search a sorted array for a target value.
@@ -217,6 +218,7 @@ const Landing = () => {
 
   return (
     <>
+    < Header />
       <ToastContainer
         position="top-right"
         autoClose={2000}
@@ -229,9 +231,9 @@ const Landing = () => {
         pauseOnHover
       />
 
-      <div className="flex flex-col lg:flex-row bg-gradient-to-r from-blue-300 via-white to-gray-100 h-screen">
+      <div className="flex flex-col lg:flex-row bg-gradient-to-r from-blue-300 via-white to-gray-100 h-auto">
         {/* Left Side: Question Display */}
-        <div className="lg:w-1/2 p-4 bg-blue-200 text-black rounded shadow mb-4 lg:mb-0">
+        <div className="lg:w-1/2 p-4 bg-blue-50 text-black  shadow mb-4 lg:mb-0">
           
           <h2 className="text-xl font-semibold mb-2">{question.title}</h2>
 

@@ -80,7 +80,7 @@ app.use('/quiz', require('./routes/quizRoute'));
 
 
 /* SERVER SETUP */
-const PORT = process.env.PORT || 9000;
+const PORT = process.env.PORT ;
 
 connectDB().then(() => {
     app.listen(PORT, () => {
