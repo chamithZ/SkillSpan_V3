@@ -59,5 +59,10 @@ Quizzes
 Quiz overview
 ![Screenshot 2023-10-05 204534](https://github.com/chamithZ/SkillSpan_V3/assets/89042294/01fdc60a-a765-4d27-af57-3dd370b62fd6)
 
+SkillSpan Certificate
+
+![Screenshot 2023-11-03 224421](https://github.com/chamithZ/SkillSpan_V3/assets/89042294/95c9cbeb-78d0-4f6c-bd93-52181911bac9)
+
+
 
 
