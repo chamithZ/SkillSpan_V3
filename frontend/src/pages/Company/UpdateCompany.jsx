@@ -10,7 +10,9 @@ function UpdateCompany() {
     companyRegID: '',
     industry: '',
     contactNumber: '',
+    companyDetails: '',
     email: '',
+    
     
   });
 
@@ -126,8 +128,8 @@ function UpdateCompany() {
           <textarea
             rows="4"
             name="description"
-            value={formData.description}
-            onChange={handleChange}
+            value={formData.companyDetails}
+            onChange={handleChange} 
             className="w-full border p-2 rounded-md focus:ring-blue-500 focus:border-blue-500"
             placeholder="Enter Description"
             maxLength="300"

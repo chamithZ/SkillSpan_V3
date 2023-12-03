@@ -25,7 +25,7 @@ function GetSingleRoadMap() {
 
   const fetchAssignments = () => {
     axios
-      .get(`http://localhost:1337/assignment/getSingleByRoadMap/${id}`)
+      .get(`http://localhost:1337/assignment/getAll`)
       .then((response) => {
         setAssignments(response.data);
         setShowAssignments(true);
@@ -107,7 +107,7 @@ function GetSingleRoadMap() {
                         <td>
                           <button
                             onClick={()=>{showRoadMapDetails(assignment._id)}}
-                            className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
+                            className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 mb-2"
                           >
                             View
                           </button>

@@ -34,27 +34,26 @@ function Header() {
 
   return (
     <header className="border-b-2 p-4">
-      <div className="container mx-auto flex justify-between items-center">
+      <div className="container mx-auto flex justify-between items-center font-medium">
         {/* Logo */}
         <div>
           <Link
             to="/"
-            className="text-2xl font-semibold text-black  "
+            className="text-2xl  text-black  "
           >
             Sk<span className='text-blue-700'>i</span>llSpan
           </Link>
         </div>
 
         {/* Navigation Links */}
-        <nav className="space-x-4 flex-grow text-right">
+        <nav className="space-x-4 flex-grow text-right font-medium ">
           <Link
             to="/"
             className="
-            hover:text-blue-700 hover:font-medium
+            hover:text-blue-700 hover:font-semibold
             capitalize
             inline-block
             text-xl
-            text-semi bold
             text-blue-700
             relative
             cursor-pointer
@@ -83,7 +82,7 @@ function Header() {
           <Link
             to="/questions"
             className="
-            hover:text-blue-700 hover:font-medium
+            hover:text-blue-700 hover:font-semibold
             capitalize
             inline-block
             text-xl
@@ -115,7 +114,7 @@ function Header() {
           <Link
             to="/company/"
             className="
-            hover:text-blue-700 hover:font-medium
+            hover:text-blue-700 hover:font-semibold
             capitalize
             inline-block
             text-xl
@@ -147,7 +146,7 @@ function Header() {
           <Link
             to="/quizlist"
             className="
-            hover:text-blue-700 hover:font-medium
+            hover:text-blue-700 hover:font-semibold
             capitalize
             inline-block
             text-xl
@@ -179,7 +178,7 @@ function Header() {
           <Link
             to="/chat"
             className="
-            hover:text-blue-700 hover:font-medium
+            hover:text-blue-700 hover:font-semibold
             capitalize
             inline-block
             text-xl
