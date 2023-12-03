@@ -56,7 +56,7 @@ function ManageCompany() {
   }
 
   return (<div>
-    <Header/>
+    
     <div className="container mx-auto p-20">
 
     <div className="grid grid-cols-1 justify-between sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-20 ">
@@ -84,13 +84,13 @@ function ManageCompany() {
             </button>
             <button
               onClick={() => handleEditCompany(company._id)} // Add a function for editing
-              className="mt-3 bg-yellow-500 text-white py-2 px-4 rounded-md hover:bg-yellow-600 w-full"
+              className="mt-3 bg-gray-400 text-white py-2 px-4 rounded-md hover:bg-gray-600 w-full"
             >
               Edit
             </button>
             <button
               onClick={() => handleDeleteQuiz(company._id)} // Add a function for deleting
-              className="bg-red-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 w-full mt-3"
+              className="bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600 w-full mt-3"
             >
               Delete
             </button>

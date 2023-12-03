@@ -3,8 +3,11 @@ const RoadMap = require('../models/RoadMap');
 
 // add employee
 const addCompany = async(req,res)=>{
+
+    
+
     const newCompany = new Company({
-        ...req.body
+        ...req.body 
     })
 
     await newCompany.save().then(()=>{
@@ -46,10 +49,10 @@ const deleteCompany = async(req,res)=>{
 const updateCompany = async(req,res)=>{
     const id = req.params.id
 
-    const { Name,Address,companyRegID,industry,contactNumber,email} = req.body ;
+    const { Name,Address,companyRegID,industry,contactNumber,email,companyDetails} = req.body ;
 
     const updatedCompany = {
-        Name,Address,companyRegID,industry,contactNumber,email
+        Name,Address,companyRegID,industry,contactNumber,email,companyDetails
     }
 
     await Company.findByIdAndUpdate(id,updatedCompany).then(()=>{

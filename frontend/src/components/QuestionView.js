@@ -49,7 +49,7 @@ console.log(binarySearch(arr, target));
 `;
 
 const Landing = () => {
-  const [code, setCode] = useState(javascriptDefault);
+  const [code, setCode] = useState();
   const [customInput, setCustomInput] = useState("");
   const [outputDetails, setOutputDetails] = useState(null);
   const [processing, setProcessing] = useState(null);
@@ -133,7 +133,7 @@ const Landing = () => {
         let status = err.response.status;
         if (status === 429) {
           showErrorToast(
-            `Quota of 100 requests exceeded for the Day! Please read the blog on freeCodeCamp to learn how to set up your own RAPID API Judge0!`,
+            `Quota of 100 requests exceeded for the Day! `,
             10000
           );
         }
@@ -213,7 +213,16 @@ const Landing = () => {
   };
 
   if (!question) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <div className="font-medium text-center">
+          <div className="inline-block w-16 h-16 border-t-4 border-blue-500 border-solid rounded-full animate-spin"></div>
+          <div className="inline-block w-16 h-16 border-t-4 border-blue-500 border-solid rounded-full animate-spin ml-4"></div>
+          <div className="inline-block w-16 h-16 border-t-4 border-blue-500 border-solid rounded-full animate-spin ml-4"></div>
+        </div>
+      </div>
+    );
+    
   }
 
   return (

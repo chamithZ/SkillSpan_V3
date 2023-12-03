@@ -4,38 +4,46 @@ import { useParams, useNavigate } from 'react-router-dom';
 import jsPDF from 'jspdf';
 import Swal from 'sweetalert2';
 
+// Loader component
+const Loader = () => (
+  <div className="flex items-center justify-center h-screen">
+    <div className="font-medium text-center">
+      <div className="inline-block w-16 h-16 border-t-4 border-blue-500 border-solid rounded-full animate-spin"></div>
+      <div className="inline-block w-16 h-16 border-t-4 border-blue-500 border-solid rounded-full animate-spin ml-4"></div>
+      <div className="inline-block w-16 h-16 border-t-4 border-blue-500 border-solid rounded-full animate-spin ml-4"></div>
+    </div>
+  </div>
+);
 
 const QuizOverview = () => {
   const [quizzes, setQuizzes] = useState([]);
   const [userAnswers, setUserAnswers] = useState([]);
   const [results, setResults] = useState(null);
-  const [percentageScore, setPercentageScore] = useState(null); // [1
+  const [percentageScore, setPercentageScore] = useState(null);
   const [showCorrectAnswers, setShowCorrectAnswers] = useState(false);
-  const [timeLeft, setTimeLeft] = useState(7200); // 2 hours in seconds
+  const [timeLeft, setTimeLeft] = useState(7200);
   const [quizSetTitle, setQuizSetTitle] = useState('');
   const [quizSubmitted, setQuizSubmitted] = useState(false);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
- 
-  let timer;
 
+  let timer;
   const { quizSetId } = useParams();
 
   useEffect(() => {
-
     const token = localStorage.getItem('jwtToken');
 
-    // Check if the token is available
     if (!token) {
-      // Token is not available, show a SweetAlert2 alert and redirect to the login page
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
         text: 'Please log in to access this page!',
       }).then(() => {
-        navigate('/login'); // Redirect to the login page
+        navigate('/login');
       });
       return;
     }
+
     fetchQuizSet();
     startTimer();
   }, []);
@@ -60,6 +68,8 @@ const QuizOverview = () => {
 
             const initialUserAnswers = new Array(fetchedQuizzes.length).fill(-1);
             setUserAnswers(initialUserAnswers);
+
+            setLoading(false); // Set loading to false once the data is fetched
           })
           .catch((error) => {
             console.error('Error fetching quizzes:', error);
@@ -69,6 +79,7 @@ const QuizOverview = () => {
         console.error('Error fetching quiz set:', error);
       });
   };
+
 
   const handleGenerateCertificate = () => {
     const token = localStorage.getItem('jwtToken'); // Retrieve the JWT token from local storage
@@ -126,10 +137,6 @@ const QuizOverview = () => {
       pdf.save('SkillSpanCertificate.pdf');
     }
   };
-  
-  
-  
-  
 
   const handleAnswerChange = (quizIndex, selectedAnswer) => {
     const updatedUserAnswers = [...userAnswers];
@@ -176,63 +183,68 @@ const QuizOverview = () => {
 
   return (
     <div className="p-4 space-y-4">
-      <div className="flex justify-between">
-        <div>
-          <h1 className="text-2xl font-bold">{quizSetTitle}</h1>
-        </div>
-        <div className="text-red-500 font-bold">
-          Time Left: {Math.floor(timeLeft / 3600)}h {Math.floor((timeLeft % 3600) / 60)}m {timeLeft % 60}s
-        </div>
-      </div>
-
-      {quizzes.map((quiz, index) => (
-        <div key={quiz._id} className="bg-white rounded-lg shadow-md p-4">
-          <h3 className="text-lg font-semibold mb-2">{quiz.question.question}</h3>
-          <div className="space-y-2">
-            {quiz.question.answers.map((answer, answerIndex) => (
-              <div key={answerIndex} className="flex flex-col mb-2">
-                <label className="inline-flex items-center">
-                  <input
-                    type="radio"
-                    name={`quiz_${quiz.question._id}`}
-                    value={answerIndex}
-                    onChange={() => handleAnswerChange(index, answerIndex)}
-                    checked={userAnswers[index] === answerIndex}
-                    className="form-radio h-5 w-5 text-indigo-600"
-                    disabled={quizSubmitted}
-                  />
-                  <span className="ml-2">{answer}</span>
-                </label>
-              </div>
-            ))}
+      {loading ? (
+        <Loader />
+      ) : (
+        <>
+          <div className="flex justify-between">
+            <div>
+              <h1 className="text-2xl font-bold">{quizSetTitle}</h1>
+            </div>
+            <div className="text-red-500 font-bold">
+              Time Left: {Math.floor(timeLeft / 3600)}h {Math.floor((timeLeft % 3600) / 60)}m {timeLeft % 60}s
+            </div>
           </div>
-          {showCorrectAnswers && (
-            <div className="mt-2 text-green-700">
-              Correct Answer: {quiz.question.answers[parseInt(quiz.question.correct_answer)]}
+
+          {quizzes.map((quiz, index) => (
+             <div key={quiz._id} className="bg-white rounded-lg shadow-md p-4">
+             <h3 className="text-lg font-semibold mb-2">{quiz.question.question}</h3>
+             <div className="space-y-2">
+               {quiz.question.answers.map((answer, answerIndex) => (
+                 <div key={answerIndex} className="flex flex-col mb-2">
+                   <label className="inline-flex items-center">
+                     <input
+                       type="radio"
+                       name={`quiz_${quiz.question._id}`}
+                       value={answerIndex}
+                       onChange={() => handleAnswerChange(index, answerIndex)}
+                       checked={userAnswers[index] === answerIndex}
+                       className="form-radio h-5 w-5 text-indigo-600"
+                       disabled={quizSubmitted}
+                     />
+                     <span className="ml-2">{answer}</span>
+                   </label>
+                 </div>
+               ))}
+             </div>
+             {showCorrectAnswers && (
+               <div className="mt-2 text-green-700">
+                 Correct Answer: {quiz.question.answers[parseInt(quiz.question.correct_answer)]}
+               </div>
+             )}
+           </div>
+         ))}
+          <button
+            onClick={handleSubmitAnswers}
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            disabled={quizSubmitted}
+          >
+            Submit Answers
+          </button>
+
+          {quizSubmitted && results && (
+            <div className="mt-4 p-4 bg-gray-100 border border-green-600 rounded-md">
+              <strong className="text-lg text-green-800">Results:</strong>
+              <p className="mt-2 text-green-800">{results}</p>
+              <button
+                onClick={handleGenerateCertificate}
+                className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded mt-4"
+              >
+                Generate Your Certificate
+              </button>
             </div>
           )}
-        </div>
-      ))}
-
-      <button
-        onClick={handleSubmitAnswers}
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        disabled={quizSubmitted}
-      >
-        Submit Answers
-      </button>
-
-      {quizSubmitted && results && (
-        <div className="mt-4 p-4 bg-gray-100 border border-green-600 rounded-md">
-          <strong className="text-lg text-green-800">Results:</strong>
-          <p className="mt-2 text-green-800">{results}</p>
-          <button
-            onClick={handleGenerateCertificate}
-            className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded mt-4"
-          >
-            Generate Your Certificate
-          </button>
-        </div>
+        </>
       )}
     </div>
   );

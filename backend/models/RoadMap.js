@@ -32,6 +32,10 @@ const roadMapSchema = new Schema({
   additionalNotes: {
     type: String,
   },
+  enrolled : {
+    type : Boolean,
+    default : false 
+  }
 });
 
 module.exports = mongoose.model("RoadMap",roadMapSchema)
